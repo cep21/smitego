@@ -7,4 +7,4 @@ dependencies:
 
 test:
   override:
-    - ./circle.sh test > >(tee $CIRCLE_ARTIFACTS/test.stdout.txt) 2> >(tee $CIRCLE_ARTIFACTS/test.stderr.txt >&2):
+    - ./circle.sh test > >(tee $CIRCLE_ARTIFACTS/test.stdout.txt) 2> >(tee $CIRCLE_ARTIFACTS/test.stderr.txt >&2)
