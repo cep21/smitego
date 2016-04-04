@@ -39,6 +39,7 @@ function do_test() {
   . "$HOME/circleutil/scripts/common.sh"
   # The go get install only works on go 1.5+ (no -f parameter)
   install_go_version "$GO_COMPILER_PATH" "$DEFAULT_GOLANG_VERSION"
+  go get -d -v -t ./...
   gobuild
   for GO_VERSION in $GO_TESTED_VERSIONS; do
   install_go_version "$GO_COMPILER_PATH" "$GO_VERSION"
