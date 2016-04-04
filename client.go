@@ -1,29 +1,29 @@
 package smitego
 
 import (
-	"net/http"
-	"fmt"
-	"time"
-	"golang.org/x/net/context"
-	"hash"
+	"bytes"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
-	"bytes"
+	"fmt"
+	"golang.org/x/net/context"
+	"hash"
 	"io"
+	"net/http"
+	"time"
 )
 
 // Why the frick is this http and not HTTPS.  (?????)
 const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 
 type Client struct {
-	BaseURL string
-	DevID int64
-	AuthKey string
-	CurTime func() time.Time
-	HTTPClient http.Client
+	BaseURL         string
+	DevID           int64
+	AuthKey         string
+	CurTime         func() time.Time
+	HTTPClient      http.Client
 	HashConstructor func() hash.Hash
-	ErrCallback func(err error)
+	ErrCallback     func(err error)
 }
 
 var ErrResponseNotExpectedJSON = errors.New("response not expected JSON")
@@ -64,8 +64,8 @@ func (c *Client) CreateSession(ctx context.Context) (*Session, error) {
 	if err := c.doReqUrl(ctx, c.URL("createsession", ""), &v); err != nil {
 		return nil, err
 	}
-	return &Session {
-		parent: c,
+	return &Session{
+		parent:    c,
 		SessionID: v.SessionID,
 	}, nil
 }
@@ -85,7 +85,7 @@ func (c *Client) URL(endpoint string, session string) string {
 	if session != "" {
 		session = session + "/"
 	}
-	ret :=  fmt.Sprintf("%s/%d/%s/%s%s", c.urlBase(endpoint), c.DevID, signature, session, timeFmt)
+	ret := fmt.Sprintf("%s/%d/%s/%s%s", c.urlBase(endpoint), c.DevID, signature, session, timeFmt)
 	return ret
 }
 

@@ -1,12 +1,12 @@
 package smitego
 
 import (
-	"golang.org/x/net/context"
 	"errors"
+	"golang.org/x/net/context"
 )
 
-type Session struct{
-	parent *Client
+type Session struct {
+	parent    *Client
 	SessionID string
 }
 

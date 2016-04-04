@@ -3,20 +3,20 @@ package smitego
 import "fmt"
 
 type createSessionResp struct {
-	RetMsg string `json:"ret_msg"`
+	RetMsg    string `json:"ret_msg"`
 	SessionID string `json:"session_id"`
 	Timestamp string `json:"timestamp"`
 }
 
 type DataUsed struct {
-	ActiveSessions int64	`json:"Active_Session"`
-	ConcurrentSessions int64	`json:"Concurrent_Sessions"`
-	RequestLimitDaily int64	`json:"Request_Limit_Daily"`
-	SessionCap int64	`json:"Session_Cap"`
-	SessionTimeLimit int64	`json:"Session_Time_Limit"`
-	TotalRequestsToday int64	`json:"Total_Requests_Today"`
-	TotalSessionsToday int64	`json:"Total_Sessions_Today"`
-	RetMsg string	`json:"ret_msg"`
+	ActiveSessions     int64  `json:"Active_Session"`
+	ConcurrentSessions int64  `json:"Concurrent_Sessions"`
+	RequestLimitDaily  int64  `json:"Request_Limit_Daily"`
+	SessionCap         int64  `json:"Session_Cap"`
+	SessionTimeLimit   int64  `json:"Session_Time_Limit"`
+	TotalRequestsToday int64  `json:"Total_Requests_Today"`
+	TotalSessionsToday int64  `json:"Total_Sessions_Today"`
+	RetMsg             string `json:"ret_msg"`
 }
 
 func (d *DataUsed) String() string {
