@@ -5,29 +5,33 @@ import (
 	"golang.org/x/net/context"
 )
 
+// Session is an authenticated smite token that can take future actions
 type Session struct {
 	parent    *Client
 	SessionID string
 }
 
 func (s *Session) urlSession(endpoint string) string {
-	u := s.parent.URL(endpoint, s.SessionID)
+	u := s.parent.url(endpoint, s.SessionID)
 	return u
 }
 
+// TestSession is a means of validating that a session is established
 func (s *Session) TestSession(ctx context.Context) (string, error) {
 	var m string
-	if err := s.parent.doReqUrl(ctx, s.urlSession("testsession"), &m); err != nil {
+	if err := s.parent.doReqURL(ctx, s.urlSession("testsession"), &m); err != nil {
 		return "", err
 	}
 	return m, nil
 }
 
-var ErrUnexpectedSize = errors.New("Unexpected data usage size")
+// ErrUnexpectedSize is returned by GetDataUsed when the response doesn't look correct
+var ErrUnexpectedSize = errors.New("unexpected data usage size")
 
+// GetDataUsed returns API Developer daily usage limits and the current status against those limits
 func (s *Session) GetDataUsed(ctx context.Context) (*DataUsed, error) {
 	r := make([]DataUsed, 1)
-	if err := s.parent.doReqUrl(ctx, s.urlSession("getdataused"), &r); err != nil {
+	if err := s.parent.doReqURL(ctx, s.urlSession("getdataused"), &r); err != nil {
 		return nil, err
 	}
 	if len(r) != 1 {

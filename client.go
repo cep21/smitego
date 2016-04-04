@@ -13,9 +13,10 @@ import (
 	"time"
 )
 
-// Why the frick is this http and not HTTPS.  (?????)
+// DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
 const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 
+// Client can create smite session objects and interact with the smite API
 type Client struct {
 	BaseURL         string
 	DevID           int64
@@ -26,17 +27,19 @@ type Client struct {
 	ErrCallback     func(err error)
 }
 
+// ErrResponseNotExpectedJSON is returned by API calls when the response isn't expected JSON
 var ErrResponseNotExpectedJSON = errors.New("response not expected JSON")
 
+// Ping is a quick way of validating access to the Hi-Rez API
 func (c *Client) Ping(ctx context.Context) error {
 	var m string
-	if err := c.doReqUrl(ctx, c.urlBase("ping"), &m); err != nil {
+	if err := c.doReqURL(ctx, c.urlBase("ping"), &m); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (c *Client) doReqUrl(ctx context.Context, u string, jsonInto interface{}) error {
+func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) error {
 	req, err := http.NewRequest("GET", u, nil)
 	if err != nil {
 		return err
@@ -59,9 +62,10 @@ func (c *Client) doReqUrl(ctx context.Context, u string, jsonInto interface{}) e
 	return nil
 }
 
+// CreateSession is A required step to Authenticate the developerId/signature for further API use.
 func (c *Client) CreateSession(ctx context.Context) (*Session, error) {
 	var v createSessionResp
-	if err := c.doReqUrl(ctx, c.URL("createsession", ""), &v); err != nil {
+	if err := c.doReqURL(ctx, c.url("createsession", ""), &v); err != nil {
 		return nil, err
 	}
 	return &Session{
@@ -74,7 +78,7 @@ func (c *Client) urlBase(endpoint string) string {
 	return fmt.Sprintf("%s/%sjson", c.BaseURL, endpoint)
 }
 
-func (c *Client) URL(endpoint string, session string) string {
+func (c *Client) url(endpoint string, session string) string {
 	timeFmt := c.CurTime().UTC().Format("20060102150405")
 	hasher := c.HashConstructor()
 	sig := fmt.Sprintf("%d%s%s%s", c.DevID, endpoint, c.AuthKey, timeFmt)

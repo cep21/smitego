@@ -8,6 +8,7 @@ type createSessionResp struct {
 	Timestamp string `json:"timestamp"`
 }
 
+// DataUsed is the JSON object returned by GetDataUsed
 type DataUsed struct {
 	ActiveSessions     int64  `json:"Active_Session"`
 	ConcurrentSessions int64  `json:"Concurrent_Sessions"`
