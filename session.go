@@ -2,6 +2,7 @@ package smitego
 
 import (
 	"errors"
+	"fmt"
 	"golang.org/x/net/context"
 )
 
@@ -38,4 +39,13 @@ func (s *Session) GetDataUsed(ctx context.Context) (*DataUsed, error) {
 		return nil, ErrUnexpectedSize
 	}
 	return &r[0], nil
+}
+
+// GetGods returns all Gods and their various attributes
+func (s *Session) GetGods(ctx context.Context, lang LanguageCode) ([]God, error) {
+	var r []God
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getgods"), lang), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
 }

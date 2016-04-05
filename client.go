@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/hex"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"golang.org/x/net/context"
 	"hash"
@@ -27,8 +26,15 @@ type Client struct {
 	ErrCallback     func(err error)
 }
 
-// ErrResponseNotExpectedJSON is returned by API calls when the response isn't expected JSON
-var ErrResponseNotExpectedJSON = errors.New("response not expected JSON")
+// ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON
+type ErrNotExpectedJSON struct {
+	OriginalBody string
+	Err error
+}
+
+func (e *ErrNotExpectedJSON) Error() string {
+	return fmt.Sprintf("Unexpected JSON: %s from %s", e.Err.Error(), e.OriginalBody)
+}
 
 // Ping is a quick way of validating access to the Hi-Rez API
 func (c *Client) Ping(ctx context.Context) error {
@@ -53,8 +59,12 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 	if _, err := io.Copy(&b, resp.Body); err != nil {
 		return err
 	}
+	debug := b.String()
 	if err := json.NewDecoder(&b).Decode(jsonInto); err != nil {
-		return ErrResponseNotExpectedJSON
+		return &ErrNotExpectedJSON{
+			OriginalBody: debug,
+			Err: err,
+		}
 	}
 	if err := resp.Body.Close(); err != nil {
 		return err

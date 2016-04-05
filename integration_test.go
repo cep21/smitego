@@ -52,5 +52,11 @@ func TestIntegration(t *testing.T) {
 		usage, err := session.GetDataUsed(ctx)
 		So(err, ShouldBeNil)
 		t.Log(usage.String())
+		gods, err := session.GetGods(ctx, English)
+		So(err, ShouldBeNil)
+		So(len(gods), ShouldBeGreaterThan, 10)
+		for _, g := range gods {
+			t.Log(g.String())
+		}
 	})
 }

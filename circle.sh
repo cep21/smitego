@@ -37,6 +37,7 @@ function do_cache() {
 # Test phase of circleci
 function do_test() {
   . "$HOME/circleutil/scripts/common.sh"
+  cd $SRC_PATH
   # The go get install only works on go 1.5+ (no -f parameter)
   install_go_version "$GO_COMPILER_PATH" "$DEFAULT_GOLANG_VERSION"
   go get -d -v -t ./...
