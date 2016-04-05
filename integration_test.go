@@ -37,6 +37,8 @@ var session *Session
 const debugMatchId = 237403351
 
 func init() {
+	// Normally each run would make its own client and session, but I'm using a single instance
+	// for all integration tests because HiRez throttles client sessions.
 	d := mustLoad("info.json")
 	client = Client{
 		BaseURL:         DefaultBaseURL,
