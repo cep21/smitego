@@ -49,7 +49,7 @@ type God struct {
 	Lore                       string             `json:"Lore"`
 	MP5PerLevel                float64            `json:"MP5PerLevel"`
 	MagicProtection            int                `json:"MagicProtection"`
-	MagicProtectionPerLevel    float64                `json:"MagicProtectionPerLevel"`
+	MagicProtectionPerLevel    float64            `json:"MagicProtectionPerLevel"`
 	MagicalPower               int                `json:"MagicalPower"`
 	MagicalPowerPerLevel       float64            `json:"MagicalPowerPerLevel"`
 	Mana                       int                `json:"Mana"`
@@ -104,12 +104,12 @@ type AbilityDescription struct {
 
 // ItemDescription gives specifics about ability or item info
 type ItemDescription struct {
-	Cooldown             string `json:"cooldown"`
-	Cost                 string        `json:"cost"`
-	Description          string        `json:"description"`
-	MenuItems            []MenuItem    `json:"menuitems"`
-	RankItems            []MenuItem    `json:"rankitems"`
-	SecondaryDescription string        `json:"secondaryDescription"`
+	Cooldown             string     `json:"cooldown"`
+	Cost                 string     `json:"cost"`
+	Description          string     `json:"description"`
+	MenuItems            []MenuItem `json:"menuitems"`
+	RankItems            []MenuItem `json:"rankitems"`
+	SecondaryDescription string     `json:"secondaryDescription"`
 }
 
 // MenuItem describes a strength of an ability

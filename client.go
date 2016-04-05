@@ -29,7 +29,7 @@ type Client struct {
 // ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON
 type ErrNotExpectedJSON struct {
 	OriginalBody string
-	Err error
+	Err          error
 }
 
 func (e *ErrNotExpectedJSON) Error() string {
@@ -63,7 +63,7 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 	if err := json.NewDecoder(&b).Decode(jsonInto); err != nil {
 		return &ErrNotExpectedJSON{
 			OriginalBody: debug,
-			Err: err,
+			Err:          err,
 		}
 	}
 	if err := resp.Body.Close(); err != nil {
