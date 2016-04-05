@@ -52,7 +52,7 @@ func (s *Session) GetGods(ctx context.Context, lang LanguageCode) ([]God, error)
 
 // GetDemoDetails returns information regarding a particular match.
 // Rarely used in lieu of getmatchdetails().
-func (s *Session) GetDemoDetails(ctx context.Context, matchID int) ([] OldMatchDetails, error) {
+func (s *Session) GetDemoDetails(ctx context.Context, matchID int) ([]OldMatchDetails, error) {
 	var r []OldMatchDetails
 	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getdemodetails"), matchID), &r); err != nil {
 		return nil, err

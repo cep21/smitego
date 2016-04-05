@@ -89,26 +89,27 @@ func (g *God) String() string {
 	return g.Name
 }
 
+// Match describes a ranked match
 type Match struct {
-	AwayTeamClanID int `json:"away_team_clan_id"`
-	AwayTeamName string `json:"away_team_name"`
+	AwayTeamClanID  int    `json:"away_team_clan_id"`
+	AwayTeamName    string `json:"away_team_name"`
 	AwayTeamTagName string `json:"away_team_tagname"`
 
-	HomeTeamClanId int `json:"home_team_clan_id"`
-	HomeTeamName string `json:"home_team_name"`
+	HomeTeamClanID  int    `json:"home_team_clan_id"`
+	HomeTeamName    string `json:"home_team_name"`
 	HomeTeamTagName string `json:"home_team_tagname"`
 
-	MapInstanceId string `json:"map_instance_id"`
-	MatchDate string `json:"match_date"`
-	MatchNumber string `json:"match_number"`
-	MatchStatus string `json:"match_status"`
+	MapInstanceID string `json:"map_instance_id"`
+	MatchDate     string `json:"match_date"`
+	MatchNumber   string `json:"match_number"`
+	MatchStatus   string `json:"match_status"`
 
-	MatchupId string `json:"matchup_id"`
+	MatchupID string `json:"matchup_id"`
 
-	Region string `json:"region"`
-	RetMsg string `json:"ret_msg"`
-	TournamentName string `json:"tournament_name"`
-	WinningTeamClanId int `json:"winning_team_clan_id"`
+	Region            string `json:"region"`
+	RetMsg            string `json:"ret_msg"`
+	TournamentName    string `json:"tournament_name"`
+	WinningTeamClanID int    `json:"winning_team_clan_id"`
 }
 
 func (m *Match) String() string {
@@ -144,26 +145,27 @@ type MenuItem struct {
 	Value       string `json:"value"`
 }
 
+// OldMatchDetails is no longer needed, but returns a limited set of match info
 type OldMatchDetails struct {
-	Ban1 string `json:"Ban1"`
-	Ban2 string `json:"Ban2"`
-	EntryDatetime string `json:"Entry_Datetime"`
-	Match int `json:"Match"`
-	MatchTime int `json:"Match_Time"`
-	OfflineSpectators int `json:"Offline_Spectators"`
-	RealtimeSpectators int `json:"Realtime_Spectators"`
-	RecordingEnded string `json:"Recording_Ended"`
-	RecordingStarted string `json:"Recording_Started"`
-	Team1AvgLevel int `json:"Team1_AvgLevel"`
-	Team1Gold int `json:"Team1_Gold"`
-	Team1Kills int `json:"Team1_Kills"`
-	Team1Score int `json:"Team1_Score"`
-	Team2AvgLevel int `json:"Team2_AvgLevel"`
-	Team2Gold int `json:"Team2_Gold"`
-	Team2Kills int `json:"Team2_Kills"`
-	Team2Score int `json:"Team2_Score"`
-	WinningTeam int `json:'Winning_Team"`
-	RetMsg string `json:'ret_msg"`
+	Ban1               string `json:"Ban1"`
+	Ban2               string `json:"Ban2"`
+	EntryDatetime      string `json:"Entry_Datetime"`
+	Match              int    `json:"Match"`
+	MatchTime          int    `json:"Match_Time"`
+	OfflineSpectators  int    `json:"Offline_Spectators"`
+	RealtimeSpectators int    `json:"Realtime_Spectators"`
+	RecordingEnded     string `json:"Recording_Ended"`
+	RecordingStarted   string `json:"Recording_Started"`
+	Team1AvgLevel      int    `json:"Team1_AvgLevel"`
+	Team1Gold          int    `json:"Team1_Gold"`
+	Team1Kills         int    `json:"Team1_Kills"`
+	Team1Score         int    `json:"Team1_Score"`
+	Team2AvgLevel      int    `json:"Team2_AvgLevel"`
+	Team2Gold          int    `json:"Team2_Gold"`
+	Team2Kills         int    `json:"Team2_Kills"`
+	Team2Score         int    `json:"Team2_Score"`
+	WinningTeam        int    `json:"Winning_Team"`
+	RetMsg             string `json:"ret_msg"`
 }
 
 // String returns all the DataUsed info

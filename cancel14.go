@@ -18,15 +18,15 @@ func withCancel(ctx context.Context, client *http.Client, req *http.Request) (*h
 
 	type doResponse struct {
 		resp *http.Response
-		err error
+		err  error
 	}
 
 	c := make(chan doResponse, 1)
 	go func() {
 		resp, err := client.Do(req)
-		c <- doResponse {
+		c <- doResponse{
 			resp: resp,
-			err: err,
+			err:  err,
 		}
 	}()
 	select {

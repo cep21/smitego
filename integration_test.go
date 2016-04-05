@@ -34,6 +34,7 @@ func mustLoad(filename string) devInfo {
 
 var client Client
 var session *Session
+
 const debugMatchId = 237403351
 
 func init() {
@@ -41,9 +42,8 @@ func init() {
 	// for all integration tests because HiRez throttles client sessions.
 	d := mustLoad("info.json")
 	client = Client{
-		BaseURL:         DefaultBaseURL,
-		DevID:           d.DevID,
-		AuthKey:         d.AuthKey,
+		DevID:   d.DevID,
+		AuthKey: d.AuthKey,
 	}
 	var err error
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)

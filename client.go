@@ -2,6 +2,7 @@ package smitego
 
 import (
 	"bytes"
+	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
@@ -9,7 +10,6 @@ import (
 	"io"
 	"net/http"
 	"time"
-	"crypto/md5"
 )
 
 // DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
@@ -17,11 +17,11 @@ const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 
 // Client can create smite session objects and interact with the smite API
 type Client struct {
-	BaseURL         string
-	DevID           int64
-	AuthKey         string
-	CurTime         func() time.Time
-	HTTPClient      http.Client
+	DevID      int64
+	AuthKey    string
+	CurTime    func() time.Time
+	BaseURL    string
+	HTTPClient http.Client
 }
 
 // ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON
@@ -55,8 +55,7 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 	if err != nil {
 		return err
 	}
-	req.Cancel = ctx.Done()
-	resp, err := c.HTTPClient.Do(req)
+	resp, err := withCancel(ctx, &c.HTTPClient, req)
 	if err != nil {
 		return err
 	}
@@ -90,7 +89,11 @@ func (c *Client) CreateSession(ctx context.Context) (*Session, error) {
 }
 
 func (c *Client) urlBase(endpoint string) string {
-	return fmt.Sprintf("%s/%sjson", c.BaseURL, endpoint)
+	base := c.BaseURL
+	if c.BaseURL == "" {
+		base = DefaultBaseURL
+	}
+	return fmt.Sprintf("%s/%sjson", base, endpoint)
 }
 
 func (c *Client) url(endpoint string, session string) string {
