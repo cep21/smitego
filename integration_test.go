@@ -3,7 +3,6 @@
 package smitego
 
 import (
-	"crypto/md5"
 	"encoding/json"
 	. "github.com/smartystreets/goconvey/convey"
 	"golang.org/x/net/context"
@@ -12,6 +11,9 @@ import (
 	"time"
 )
 
+// Create a file named info.json and put it at the root of your project.  That file should have your
+// devId and authKey.  The file should be inside .gitignore and not checked into git.  Then,
+// run `go test -v --tags=integration .` to start integration tests using your auth key.
 type devInfo struct {
 	DevID   int64  `json:"devId"`
 	AuthKey string `json:"authKey"`
@@ -30,33 +32,65 @@ func mustLoad(filename string) devInfo {
 	return v
 }
 
-func TestIntegration(t *testing.T) {
-	Convey("Loading a client", t, func() {
-		d := mustLoad("info.json")
-		c := Client{
-			BaseURL:         DefaultBaseURL,
-			DevID:           d.DevID,
-			AuthKey:         d.AuthKey,
-			CurTime:         time.Now,
-			HashConstructor: md5.New,
-		}
-		ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
-		defer cancel()
-		So(c.Ping(ctx), ShouldBeNil)
-		session, err := c.CreateSession(ctx)
-		So(err, ShouldBeNil)
-		So(session, ShouldNotBeNil)
-		msg, err := session.TestSession(ctx)
-		So(err, ShouldBeNil)
-		t.Log(msg)
-		usage, err := session.GetDataUsed(ctx)
+var client Client
+var session *Session
+const debugMatchId = 237403351
+
+func init() {
+	d := mustLoad("info.json")
+	client = Client{
+		BaseURL:         DefaultBaseURL,
+		DevID:           d.DevID,
+		AuthKey:         d.AuthKey,
+	}
+	var err error
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
+	defer cancel()
+	session, err = client.CreateSession(ctx)
+	mustNotErr(err)
+}
+
+func TestPing(t *testing.T) {
+	Convey("Ping should work", t, func() {
+		So(client.Ping(context.Background()), ShouldBeNil)
+	})
+}
+
+func TestDataUsed(t *testing.T) {
+	Convey("DataUsed should work", t, func() {
+		usage, err := session.GetDataUsed(context.Background())
 		So(err, ShouldBeNil)
 		t.Log(usage.String())
-		gods, err := session.GetGods(ctx, English)
+	})
+}
+
+func TestGetGods(t *testing.T) {
+	Convey("GetGods should work", t, func() {
+		gods, err := session.GetGods(context.Background(), English)
 		So(err, ShouldBeNil)
 		So(len(gods), ShouldBeGreaterThan, 10)
 		for _, g := range gods {
 			t.Log(g.String())
 		}
+	})
+}
+
+func TestGetEsportsproleaguedetails(t *testing.T) {
+	Convey("GetEsportsproleaguedetails should work", t, func() {
+		matches, err := session.GetEsportsproleaguedetails(context.Background())
+		So(err, ShouldBeNil)
+		So(len(matches), ShouldBeGreaterThan, 1)
+		for _, m := range matches {
+			t.Log(m)
+			t.Log(m.String())
+		}
+	})
+}
+
+func TestGetDemoDetails(t *testing.T) {
+	Convey("GetDemoDetails should work", t, func() {
+		dets, err := session.GetDemoDetails(context.Background(), debugMatchId)
+		So(err, ShouldBeNil)
+		So(len(dets), ShouldEqual, 1)
 	})
 }

@@ -6,10 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"golang.org/x/net/context"
-	"hash"
 	"io"
 	"net/http"
 	"time"
+	"crypto/md5"
 )
 
 // DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
@@ -22,8 +22,6 @@ type Client struct {
 	AuthKey         string
 	CurTime         func() time.Time
 	HTTPClient      http.Client
-	HashConstructor func() hash.Hash
-	ErrCallback     func(err error)
 }
 
 // ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON
@@ -34,6 +32,13 @@ type ErrNotExpectedJSON struct {
 
 func (e *ErrNotExpectedJSON) Error() string {
 	return fmt.Sprintf("Unexpected JSON: %s from %s", e.Err.Error(), e.OriginalBody)
+}
+
+func (c *Client) clientTime() time.Time {
+	if c.CurTime == nil {
+		return time.Now()
+	}
+	return c.CurTime()
 }
 
 // Ping is a quick way of validating access to the Hi-Rez API
@@ -72,7 +77,7 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 	return nil
 }
 
-// CreateSession is A required step to Authenticate the developerId/signature for further API use.
+// CreateSession is a required step to Authenticate the developerId/signature for further API use.
 func (c *Client) CreateSession(ctx context.Context) (*Session, error) {
 	var v createSessionResp
 	if err := c.doReqURL(ctx, c.url("createsession", ""), &v); err != nil {
@@ -89,8 +94,8 @@ func (c *Client) urlBase(endpoint string) string {
 }
 
 func (c *Client) url(endpoint string, session string) string {
-	timeFmt := c.CurTime().UTC().Format("20060102150405")
-	hasher := c.HashConstructor()
+	timeFmt := c.clientTime().UTC().Format("20060102150405")
+	hasher := md5.New()
 	sig := fmt.Sprintf("%d%s%s%s", c.DevID, endpoint, c.AuthKey, timeFmt)
 	_, err := hasher.Write([]byte(sig))
 	mustNotErr(err)

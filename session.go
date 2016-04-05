@@ -49,3 +49,33 @@ func (s *Session) GetGods(ctx context.Context, lang LanguageCode) ([]God, error)
 	}
 	return r, nil
 }
+
+// GetDemoDetails returns information regarding a particular match.
+// Rarely used in lieu of getmatchdetails().
+func (s *Session) GetDemoDetails(ctx context.Context, matchID int) ([] OldMatchDetails, error) {
+	var r []OldMatchDetails
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getdemodetails"), matchID), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetEsportsproleaguedetails returns the matchup information for each matchup for the current
+// eSports Pro League season.  An important return value is “match_status” which represents a
+// match being scheduled (1), in-progress (2), or complete (3)
+func (s *Session) GetEsportsproleaguedetails(ctx context.Context) ([]Match, error) {
+	var r []Match
+	if err := s.parent.doReqURL(ctx, s.urlSession("getesportsproleaguedetails"), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetFriends returns the Smite User names of each of the player’s friends.
+func (s *Session) GetFriends(ctx context.Context, playerID int) ([]Match, error) {
+	var r []Match
+	if err := s.parent.doReqURL(ctx, s.urlSession("getfriends"), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
