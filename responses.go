@@ -22,6 +22,11 @@ type DataUsed struct {
 	RetMsg             string `json:"ret_msg"`
 }
 
+// String returns all the DataUsed info
+func (d *DataUsed) String() string {
+	return fmt.Sprintf("Active: %d Concurrent: %d Limit: %d Session Cap: %d Time Limit: %d Today's requests: %d Today's session %d RetMsg %s", d.ActiveSessions, d.ConcurrentSessions, d.RequestLimitDaily, d.SessionCap, d.SessionTimeLimit, d.TotalRequestsToday, d.TotalSessionsToday, d.RetMsg)
+}
+
 // God is a smite God
 type God struct {
 	Ability1                   string             `json:"Ability1"`
@@ -168,9 +173,17 @@ type OldMatchDetails struct {
 	RetMsg             string `json:"ret_msg"`
 }
 
-// String returns all the DataUsed info
-func (d *DataUsed) String() string {
-	return fmt.Sprintf("Active: %d Concurrent: %d Limit: %d Session Cap: %d Time Limit: %d Today's requests: %d Today's session %d RetMsg %s", d.ActiveSessions, d.ConcurrentSessions, d.RequestLimitDaily, d.SessionCap, d.SessionTimeLimit, d.TotalRequestsToday, d.TotalSessionsToday, d.RetMsg)
+// Player is a smite player/account
+type Player struct {
+	AccountID string `json:"account_id"`
+	AvatarURL string `json:"avatar_url"`
+	Name      string `json:"name"`
+	PlayerID  string `json:"player_id"`
+	RetMsg    string `json:"ret_msg"`
+}
+
+func (s *Player) String() string {
+	return s.Name
 }
 
 // LanguageCode controls what language a response is in

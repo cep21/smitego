@@ -72,9 +72,9 @@ func (s *Session) GetEsportsproleaguedetails(ctx context.Context) ([]Match, erro
 }
 
 // GetFriends returns the Smite User names of each of the player’s friends.
-func (s *Session) GetFriends(ctx context.Context, playerID int) ([]Match, error) {
-	var r []Match
-	if err := s.parent.doReqURL(ctx, s.urlSession("getfriends"), &r); err != nil {
+func (s *Session) GetFriends(ctx context.Context, player string) ([]Player, error) {
+	var r []Player
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("getfriends"), player), &r); err != nil {
 		return nil, err
 	}
 	return r, nil

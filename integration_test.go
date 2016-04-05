@@ -36,6 +36,7 @@ var client Client
 var session *Session
 
 const debugMatchId = 237403351
+const debugPlayerId = "cep21"
 
 func init() {
 	// Normally each run would make its own client and session, but I'm using a single instance
@@ -94,5 +95,13 @@ func TestGetDemoDetails(t *testing.T) {
 		dets, err := session.GetDemoDetails(context.Background(), debugMatchId)
 		So(err, ShouldBeNil)
 		So(len(dets), ShouldEqual, 1)
+	})
+}
+
+func TestGetFriends(t *testing.T) {
+	Convey("GetFriends should work", t, func() {
+		friends, err := session.GetFriends(context.Background(), debugPlayerId)
+		So(err, ShouldBeNil)
+		So(len(friends), ShouldBeGreaterThan, 1)
 	})
 }
