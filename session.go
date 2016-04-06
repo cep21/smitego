@@ -79,3 +79,54 @@ func (s *Session) GetFriends(ctx context.Context, player string) ([]Player, erro
 	}
 	return r, nil
 }
+
+// GetGodRecommendedItems Returns the Recommended Items for a particular God. .
+func (s *Session) GetGodRecommendedItems(ctx context.Context, godID int, lang LanguageCode) ([]RecommendedItem, error) {
+	var r []RecommendedItem
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d/%d", s.urlSession("getgodrecommendeditems"), godID, lang), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetItems returns all Items and their various attributes.
+func (s *Session) GetItems(ctx context.Context, lang LanguageCode) ([]Item, error) {
+	var r []Item
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getitems"), lang), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetMatchDetails returns the statistics for a particular completed match.
+func (s *Session) GetMatchDetails(ctx context.Context, matchID int) ([]MatchPlayerInfo, error) {
+	var r []MatchPlayerInfo
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getmatchdetails"), matchID), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetMatchPlayerDetails returns player information for a live match.
+func (s *Session) GetMatchPlayerDetails(ctx context.Context, matchID int) ([]MatchPlayerDetails, error) {
+	var r []MatchPlayerDetails
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getmatchplayerdetails"), matchID), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetMatchidsByQueue lists all Match IDs for a particular Match Queue; useful for API developers
+// interested in constructing data by Queue.  To limit the data returned, an {hour} parameter was
+// added (valid values: 0 - 23).  An {hour} parameter of -1 represents the entire day, but be
+// warned that this may be more data than we can return for certain queues.  Also, a returned
+// “active_flag” means that there is no match information/stats for the corresponding match.
+// Usually due to a match being in-progress, though there could be other reasons..
+func (s *Session) GetMatchidsByQueue(ctx context.Context, queue Queue, year int, month int, day int, hour int) ([]MatchQueueId, error) {
+	var r []MatchQueueId
+	dateFmt := fmt.Sprintf("%04d%02d%02d", year, month, day)
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d/%s/%d", s.urlSession("getmatchidsbyqueue"), queue, dateFmt, hour), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}

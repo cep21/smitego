@@ -37,6 +37,7 @@ var session *Session
 
 const debugMatchId = 237403351
 const debugPlayerId = "cep21"
+const debugGodId = 1737
 
 func init() {
 	// Normally each run would make its own client and session, but I'm using a single instance
@@ -103,5 +104,49 @@ func TestGetFriends(t *testing.T) {
 		friends, err := session.GetFriends(context.Background(), debugPlayerId)
 		So(err, ShouldBeNil)
 		So(len(friends), ShouldBeGreaterThan, 1)
+	})
+}
+
+func TestGetGodRecommendedItems(t *testing.T) {
+	Convey("getgodrecommendeditems should work", t, func() {
+		items, err := session.GetGodRecommendedItems(context.Background(), debugGodId, English)
+		So(err, ShouldBeNil)
+		So(len(items), ShouldBeGreaterThan, 12)
+	})
+}
+
+func TestGetItems(t *testing.T) {
+	Convey("GetItems should work", t, func() {
+		items, err := session.GetItems(context.Background(), English)
+		So(err, ShouldBeNil)
+		So(len(items), ShouldBeGreaterThan, 12)
+		for _, i := range items {
+			t.Log(i.String())
+		}
+	})
+}
+
+func TestGetMatchDetails(t *testing.T) {
+	Convey("GetMatchDetails should work", t, func() {
+		dets, err := session.GetMatchDetails(context.Background(), debugMatchId)
+		So(err, ShouldBeNil)
+		So(len(dets), ShouldBeGreaterThan, 9)
+	})
+}
+
+func TestGetMatchPlayerDetails(t *testing.T) {
+	Convey("GetMatchPlayerDetails should work", t, func() {
+		dets, err := session.GetMatchPlayerDetails(context.Background(), debugMatchId)
+		So(err, ShouldBeNil)
+		So(len(dets), ShouldEqual, 1)
+	})
+}
+
+func TestGetMatchidsByQueue(t *testing.T) {
+	Convey("GetMatchidsByQueue should work", t, func() {
+		client.VerboseLog = t.Log
+		dets, err := session.GetMatchidsByQueue(context.Background(), Joust3v3, 2016, 4, 5, 1)
+		So(err, ShouldBeNil)
+		So(len(dets), ShouldEqual, 1268)
 	})
 }

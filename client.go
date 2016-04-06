@@ -19,15 +19,24 @@ const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 type Client struct {
 	DevID      int64
 	AuthKey    string
-	CurTime    func() time.Time
-	BaseURL    string
 	HTTPClient http.Client
+	BaseURL    string
+	CurTime    func() time.Time
+	VerboseLog Log
 }
+
+type Log func(...interface{})
 
 // ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON
 type ErrNotExpectedJSON struct {
 	OriginalBody string
 	Err          error
+}
+
+func (c *Client) verboseLog(v ...interface{}) {
+	if c.VerboseLog != nil {
+		c.VerboseLog(v...)
+	}
 }
 
 func (e *ErrNotExpectedJSON) Error() string {
@@ -51,6 +60,7 @@ func (c *Client) Ping(ctx context.Context) error {
 }
 
 func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) error {
+	c.verboseLog("fetching", u)
 	req, err := http.NewRequest("GET", u, nil)
 	if err != nil {
 		return err
@@ -64,6 +74,7 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 		return err
 	}
 	debug := b.String()
+	c.verboseLog("Fetch result", debug)
 	if err := json.NewDecoder(&b).Decode(jsonInto); err != nil {
 		return &ErrNotExpectedJSON{
 			OriginalBody: debug,
