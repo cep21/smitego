@@ -130,3 +130,13 @@ func (s *Session) GetMatchidsByQueue(ctx context.Context, queue Queue, year int,
 	}
 	return r, nil
 }
+
+// GetLeagueLeaderboard returns the top players for a particular league
+// (as indicated by the queue/tier/season parameters).
+func (s *Session) GetLeagueLeaderboard(ctx context.Context, queue Queue, tier Tier, season int) ([]LeaderboardPlayer, error) {
+	var r []LeaderboardPlayer
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d/%d/%d", s.urlSession("getleagueleaderboard"), queue, tier, season), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}

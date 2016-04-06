@@ -384,6 +384,25 @@ type MatchQueueID struct {
 	RetMsg     string `json:"ret_msg"`
 }
 
+// LeaderboardPlayer is a result from getting tier leader boards
+type LeaderboardPlayer struct {
+	Leaves int `json:"Leaves"`
+	Losses int `json:"Losses"`
+	Name string `json:"Name"`
+	Points int `json:"Points"`
+	PrevRank int `json:"PrevRank"`
+	Rank int `json:"Rank"`
+	RankStatConquest string `json:"Rank_Stat_Conquest"`
+	RankStatDuel string `json:"Rank_Stat_Duel"`
+	RankStatJoust string `json:"Rank_Stat_Joust"`
+	Season int `json:"Season"`
+	Tier int `json:"Tier"`
+	Trend int `json:"Trend"`
+	Wins int `json:"Wins"`
+	PlayerID string `json:"player_id"`
+	RetMsg string `json:"ret_msg"`
+}
+
 // LanguageCode controls what language a response is in
 type LanguageCode int
 
@@ -456,4 +475,35 @@ const (
 	Clash = 466
 	// ClashChallenge is an unknown map type (Not sure what challenge means)
 	ClashChallenge = 467
+)
+
+type Tier int
+
+const (
+	BronzeV Tier = 1
+	BronzeIV = 2
+	BronzeIII = 3
+	BronzeII = 4
+	BronzeI = 5
+	SilverV = 6
+	SilverIV = 7
+	SilverIII = 8
+	SilverII = 9
+	SilverI = 10
+	GoldV = 11
+	GoldIV = 12
+	GoldIII = 13
+	GoldII = 14
+	GoldI = 15
+	PlatinumV = 16
+	PlatinumIV = 17
+	PlatinumIII = 18
+	PlatinumII = 19
+	PlatinumI = 20
+	DiamondV = 21
+	DiamondIV = 22
+	DiamondIII = 23
+	DiamondII = 24
+	DiamondI = 25
+	MastersI = 26
 )

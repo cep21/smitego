@@ -150,3 +150,12 @@ func TestGetMatchidsByQueue(t *testing.T) {
 		So(len(dets), ShouldEqual, 1268)
 	})
 }
+
+func TestGetLeagueLeaderboard(t *testing.T) {
+	Convey("GetLeagueLeaderboard should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetLeagueLeaderboard(context.Background(), JoustRanked3v3, SilverI, 5)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldEqual, 500)
+	})
+}
