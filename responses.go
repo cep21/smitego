@@ -188,111 +188,112 @@ func (s *Player) String() string {
 
 // RecommendedItem is item stats
 type RecommendedItem struct {
-	Category string `json:"Category"`
-	Item string `json:"Item"`
-	Role string `json:"Role"`
-	CategoryValueID int `json:"category_value_id"`
-	GodID int `json:"god_id"`
-	GodName string `json:"god_name"`
-	IconID int `json:"icon_id"`
-	ItemID int `json:"item_id"`
-	RetMsg string `json:"ret_msg"`
-	RoleValueID int `json:"role_value_id"`
+	Category        string `json:"Category"`
+	Item            string `json:"Item"`
+	Role            string `json:"Role"`
+	CategoryValueID int    `json:"category_value_id"`
+	GodID           int    `json:"god_id"`
+	GodName         string `json:"god_name"`
+	IconID          int    `json:"icon_id"`
+	ItemID          int    `json:"item_id"`
+	RetMsg          string `json:"ret_msg"`
+	RoleValueID     int    `json:"role_value_id"`
 }
 
+// Item describes a smite item
 type Item struct {
-	ChildItemId int `json:"ChildItemId"`
-	DeviceName string `json:"DeviceName"`
-	IconID int `json:"IconId"`
+	ChildItemID     int             `json:"ChildItemId"`
+	DeviceName      string          `json:"DeviceName"`
+	IconID          int             `json:"IconId"`
 	ItemDescription ItemDescription `json:"ItemDescription"`
-	ItemID int `json:"ItemId"`
-	ItemTier int `json:"ItemTier"`
-	Price int `json:"Price"`
-	RootItemID int `json:"RootItemId"`
-	ShortDesc string `json:"ShortDesc"`
-	StartingItem bool `json:"StartingItem"`
-	Type string `json:"Type"`
-	ItemIconURL string `json:"itemIcon_URL"`
-	RetMsg string `json:"ret_msg"`
+	ItemID          int             `json:"ItemId"`
+	ItemTier        int             `json:"ItemTier"`
+	Price           int             `json:"Price"`
+	RootItemID      int             `json:"RootItemId"`
+	ShortDesc       string          `json:"ShortDesc"`
+	StartingItem    bool            `json:"StartingItem"`
+	Type            string          `json:"Type"`
+	ItemIconURL     string          `json:"itemIcon_URL"`
+	RetMsg          string          `json:"ret_msg"`
 }
 
 func (i *Item) String() string {
 	return i.DeviceName
 }
 
-
+// MatchPlayerInfo describes detailed information about a single player in a match
 type MatchPlayerInfo struct {
 	AccountLevel int `json:"Account_Level"`
-	ActiveID1 int `json:"ActiveId1"`
-	ActiveId2 int `json:"ActiveId2"`
-	Assists int `json:"Assists"`
+	ActiveID1    int `json:"ActiveId1"`
+	ActiveID2    int `json:"ActiveId2"`
+	Assists      int `json:"Assists"`
 
-	Ban1 string `json:"Ban1"`
-	Ban1Id int `json:"Ban1Id"`
+	Ban1   string `json:"Ban1"`
+	Ban1Id int    `json:"Ban1Id"`
 
-	Ban10 string `json:"Ban10"`
-	Ban10Id int `json:"Ban10Id"`
+	Ban10   string `json:"Ban10"`
+	Ban10Id int    `json:"Ban10Id"`
 
-	Ban2 string `json:"Ban2"`
-	Ban2Id int `json:"Ban2Id"`
+	Ban2   string `json:"Ban2"`
+	Ban2Id int    `json:"Ban2Id"`
 
-	Ban3 string `json:"Ban3"`
-	Ban3Id int `json:"Ban3Id"`
+	Ban3   string `json:"Ban3"`
+	Ban3Id int    `json:"Ban3Id"`
 
-	Ban4 string `json:"Ban4"`
-	Ban4Id int `json:"Ban4Id"`
+	Ban4   string `json:"Ban4"`
+	Ban4Id int    `json:"Ban4Id"`
 
-	Ban5 string `json:"Ban5"`
-	Ban5Id int `json:"Ban5Id"`
+	Ban5   string `json:"Ban5"`
+	Ban5Id int    `json:"Ban5Id"`
 
-	Ban6 string `json:"Ban6"`
-	Ban6Id int `json:"Ban6Id"`
+	Ban6   string `json:"Ban6"`
+	Ban6Id int    `json:"Ban6Id"`
 
-	Ban7 string `json:"Ban7"`
-	Ban7Id int `json:"Ban7Id"`
+	Ban7   string `json:"Ban7"`
+	Ban7Id int    `json:"Ban7Id"`
 
-	Ban8 string `json:"Ban8"`
-	Ban8Id int `json:"Ban8Id"`
+	Ban8   string `json:"Ban8"`
+	Ban8Id int    `json:"Ban8Id"`
 
-	Ban9 string `json:"Ban9"`
-	Ban9Id int `json:"Ban9Id"`
+	Ban9   string `json:"Ban9"`
+	Ban9Id int    `json:"Ban9Id"`
 
 	CampsCleared int `json:"Camps_Cleared"`
 
 	ConquestLosses int `json:"Conquest_Losses"`
 	ConquestPoints int `json:"Conquest_Points"`
-	ConquestTier int `json:"Conquest_Tier"`
-	ConquestWins int `json:"Conquest_Wins"`
+	ConquestTier   int `json:"Conquest_Tier"`
+	ConquestWins   int `json:"Conquest_Wins"`
 
-	DamageBot int `json:"Damage_Bot"`
-	DamageDoneMagical int `json:"Damage_Done_Magical"`
+	DamageBot          int `json:"Damage_Bot"`
+	DamageDoneMagical  int `json:"Damage_Done_Magical"`
 	DamageDonePhysical int `json:"Damage_Done_Physical"`
-	DamageMitigated int `json:"Damage_Mitigated"`
-	DamagePlayer int `json:"Damage_Player"`
-	DamageTaken int `json:"Damage_Taken"`
-	Deaths int `json:"Deaths"`
+	DamageMitigated    int `json:"Damage_Mitigated"`
+	DamagePlayer       int `json:"Damage_Player"`
+	DamageTaken        int `json:"Damage_Taken"`
+	Deaths             int `json:"Deaths"`
 
 	DuelLosses int `json:"Duel_Losses"`
 	DuelPoints int `json:"Duel_Points"`
-	DuelTier int `json:"Duel_Tier"`
-	DuelWins int `json:"Duel_Wins"`
+	DuelTier   int `json:"Duel_Tier"`
+	DuelWins   int `json:"Duel_Wins"`
 
 	EntryDatetime string `json:"Entry_Datetime"`
 
 	FinalMatchLevel int `json:"Final_Match_Level"`
 
-	FirstBanSide string `json:"First_Ban_Side"`
-	GodID int `json:"GodId"`
-	GoldEarned int `json:"Gold_Earned"`
-	GoldPerMinute int `json:"Gold_Per_Minute"`
+	FirstBanSide  string `json:"First_Ban_Side"`
+	GodID         int    `json:"GodId"`
+	GoldEarned    int    `json:"Gold_Earned"`
+	GoldPerMinute int    `json:"Gold_Per_Minute"`
 
 	Healing int `json:"Healing"`
-	ItemId1 int `json:"ItemId1"`
-	ItemId2 int `json:"ItemId2"`
-	ItemId3 int `json:"ItemId3"`
-	ItemId4 int `json:"ItemId4"`
-	ItemId5 int `json:"ItemId5"`
-	ItemId6 int `json:"ItemId6"`
+	ItemID1 int `json:"ItemId1"`
+	ItemID2 int `json:"ItemId2"`
+	ItemID3 int `json:"ItemId3"`
+	ItemID4 int `json:"ItemId4"`
+	ItemID5 int `json:"ItemId5"`
+	ItemID6 int `json:"ItemId6"`
 
 	ItemActive1 string `json:"Item_Active_1"`
 	ItemActive2 string `json:"Item_Active_2"`
@@ -307,8 +308,8 @@ type MatchPlayerInfo struct {
 
 	JoustLosses int `json:"Joust_Losses"`
 	JoustPoints int `json:"Joust_Points"`
-	JoustTier int `json:"Joust_Tier"`
-	JoustWins int `json:"Joust_Wins"`
+	JoustTier   int `json:"Joust_Tier"`
+	JoustWins   int `json:"Joust_Wins"`
 
 	KillingSpree int `json:"Killing_Spree"`
 
@@ -322,63 +323,65 @@ type MatchPlayerInfo struct {
 
 	KillsGoldFury int `json:"Kills_Gold_Fury"`
 
-	KillsPenta int `json:"Kills_Penta"`
-	KillsPhoenix int `json:"Kills_Phoenix"`
-	KillsPlayer int `json:"Kills_Player"`
-	KillsQuadra int `json:"Kills_Quadra"`
-	KillsSiege_Juggernaut int `json:"Kills_Siege_Juggernaut"`
-	KillsSingle int `json:"Kills_Single"`
-	KillsTriple int `json:"Kills_Triple"`
-	KillsWildJuggernaut int `json:"Kills_Wild_Juggernaut"`
-	MasteryLevel int `json:"Mastery_Level"`
-	Match int `json:"Match"`
-	Minutes int `json:"Minutes"`
-	MultikillMax int `json:"Multi_kill_Max"`
-	PartyId int `json:"PartyId"`
-	RankStatConquest int `json:"Rank_Stat_Conquest"`
-	RankStatDuel int `json:"Rank_Stat_Duel"`
-	RankStatJoust int `json:"Rank_Stat_Joust"`
-	ReferenceName string `json:"Reference_Name"`
-	Skin string `json:"Skin"`
-	SkinId int `json:"SkinId"`
-	StructureDamage int `json:"Structure_Damage"`
-	Surrendered string `json:"Surrendered"`
-	Team1Score int `json:"Team1Score"`
-	Team2Score int `json:"Team2Score"`
-	TeamId int `json:"TeamId"`
-	TeamName string `json:"Team_Name"`
-	TowersDestroyed int `json:"Towers_Destroyed"`
-	WardsPlaced int `json:"Wards_Placed"`
-	Win_Status string `json:"Win_Status"`
-	HasReplay string `json:"hasReplay"`
-	Name string `json:"name"`
-	PlayerId string `json:"playerId"`
-	PlayerName string `json:"playerName"`
-	RetMsg string `json:"ret_msg"`
+	KillsPenta           int    `json:"Kills_Penta"`
+	KillsPhoenix         int    `json:"Kills_Phoenix"`
+	KillsPlayer          int    `json:"Kills_Player"`
+	KillsQuadra          int    `json:"Kills_Quadra"`
+	KillsSiegeJuggernaut int    `json:"Kills_Siege_Juggernaut"`
+	KillsSingle          int    `json:"Kills_Single"`
+	KillsTriple          int    `json:"Kills_Triple"`
+	KillsWildJuggernaut  int    `json:"Kills_Wild_Juggernaut"`
+	MasteryLevel         int    `json:"Mastery_Level"`
+	Match                int    `json:"Match"`
+	Minutes              int    `json:"Minutes"`
+	MultikillMax         int    `json:"Multi_kill_Max"`
+	PartyID              int    `json:"PartyId"`
+	RankStatConquest     int    `json:"Rank_Stat_Conquest"`
+	RankStatDuel         int    `json:"Rank_Stat_Duel"`
+	RankStatJoust        int    `json:"Rank_Stat_Joust"`
+	ReferenceName        string `json:"Reference_Name"`
+	Skin                 string `json:"Skin"`
+	SkinID               int    `json:"SkinId"`
+	StructureDamage      int    `json:"Structure_Damage"`
+	Surrendered          string `json:"Surrendered"`
+	Team1Score           int    `json:"Team1Score"`
+	Team2Score           int    `json:"Team2Score"`
+	TeamID               int    `json:"TeamId"`
+	TeamName             string `json:"Team_Name"`
+	TowersDestroyed      int    `json:"Towers_Destroyed"`
+	WardsPlaced          int    `json:"Wards_Placed"`
+	WinStatus            string `json:"Win_Status"`
+	HasReplay            string `json:"hasReplay"`
+	Name                 string `json:"name"`
+	PlayerID             string `json:"playerId"`
+	PlayerName           string `json:"playerName"`
+	RetMsg               string `json:"ret_msg"`
 }
 
+// MatchPlayerDetails are limited information about a currently live match.
 type MatchPlayerDetails struct {
-	AccountLevel int `json:"Account_Level"`
-	GodId int `json:"GodId"`
-	GodName string `json:"GodName"`
-	MasteryLevel int `json:"Mastery_Level"`
-	Match int `json:"Match"`
-	Queue string `json:"Queue"`
-	SkinId int `json:"SkinId"`
-	Tier int `json:"Tier"`
+	AccountLevel  int    `json:"Account_Level"`
+	GodID         int    `json:"GodId"`
+	GodName       string `json:"GodName"`
+	MasteryLevel  int    `json:"Mastery_Level"`
+	Match         int    `json:"Match"`
+	Queue         string `json:"Queue"`
+	SkinID        int    `json:"SkinId"`
+	Tier          int    `json:"Tier"`
 	PlayerCreated string `json:"playerCreated"`
-	PlayerId string `json:"playerId"`
-	PlayerName string `json:"playerName"`
-	RetMsg string `json:"ret_msg"`
-	TaskForce int `json:"taskForce"`
-	TierLosses int `json:"tierLosses"`
-	TierWins int `json:"tierWins"`
+	PlayerID      string `json:"playerId"`
+	PlayerName    string `json:"playerName"`
+	RetMsg        string `json:"ret_msg"`
+	TaskForce     int    `json:"taskForce"`
+	TierLosses    int    `json:"tierLosses"`
+	TierWins      int    `json:"tierWins"`
 }
 
-type MatchQueueId struct {
+// MatchQueueID is limited information about a running (or ran) match.
+type MatchQueueID struct {
 	ActiveFlag string `json:"Active_Flag"`
-	Match string `json:"Match"`
-	RetMsg string `json:"ret_msg"`
+	Match      string `json:"Match"`
+	RetMsg     string `json:"ret_msg"`
 }
 
 // LanguageCode controls what language a response is in
@@ -405,29 +408,52 @@ const (
 	Turkish = 13
 )
 
+// Queue describes a type of smite match
 type Queue int
 
 const (
+	// Conquest5v5 is the Conquest queue
 	Conquest5v5 Queue = 423
+	// NoviceQueue is unknown type
 	NoviceQueue = 424
+	// Conquest is unknown queue type
 	Conquest = 426
+	// Practice is a custom map
 	Practice = 427
+	// ConquestChallenge is an unknown type (Not sure what challenge means)
 	ConquestChallenge = 429
+	// ConquestRanked is ranked conquest
 	ConquestRanked = 430
+	// Domination is an unknown type
 	Domination = 433
+	// MOTD is a map of the day
 	MOTD = 434 // (use with 465 to get all MOTD matches),
+	// Arena map type
 	Arena = 435
+	// ArenaChallenge is unknown type
 	ArenaChallenge = 438
+	// DominationChallenge is unknown type
 	DominationChallenge = 439
+	// JoustRanked1v1RankedDuel is ranked duel
 	JoustRanked1v1RankedDuel = 440
+	// JoustChallenge is an unkonwn type
 	JoustChallenge = 441
+	// Assault is the assault type
 	Assault = 445
+	// AssaultChallenge is an unknown type
 	AssaultChallenge = 446
+	// Joust3v3 is normal joust
 	Joust3v3 = 448
+	// JoustRanked3v3 is ranked joust
 	JoustRanked3v3 = 450
+	// ConquestRanked2 is an unknown type
 	ConquestRanked2 = 451
+	// ArenaRanked is an old map type, of ranked arena
 	ArenaRanked = 452
+	// MOTD2 is map of the day, but all map of the day types
 	MOTD2 = 465 // (Supports “closing” the Queue by our platform; use with 434)
+	// Clash is the clash map type
 	Clash = 466
+	// ClashChallenge is an unknown map type (Not sure what challenge means)
 	ClashChallenge = 467
 )

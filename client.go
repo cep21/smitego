@@ -25,6 +25,7 @@ type Client struct {
 	VerboseLog Log
 }
 
+// Log is a function that Client can take to optionally verbose log what it does internally
 type Log func(...interface{})
 
 // ErrNotExpectedJSON is returned by API calls when the response isn't expected JSON

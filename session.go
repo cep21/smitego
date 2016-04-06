@@ -122,8 +122,8 @@ func (s *Session) GetMatchPlayerDetails(ctx context.Context, matchID int) ([]Mat
 // warned that this may be more data than we can return for certain queues.  Also, a returned
 // “active_flag” means that there is no match information/stats for the corresponding match.
 // Usually due to a match being in-progress, though there could be other reasons..
-func (s *Session) GetMatchidsByQueue(ctx context.Context, queue Queue, year int, month int, day int, hour int) ([]MatchQueueId, error) {
-	var r []MatchQueueId
+func (s *Session) GetMatchidsByQueue(ctx context.Context, queue Queue, year int, month int, day int, hour int) ([]MatchQueueID, error) {
+	var r []MatchQueueID
 	dateFmt := fmt.Sprintf("%04d%02d%02d", year, month, day)
 	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d/%s/%d", s.urlSession("getmatchidsbyqueue"), queue, dateFmt, hour), &r); err != nil {
 		return nil, err
