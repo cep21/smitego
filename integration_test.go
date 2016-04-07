@@ -168,3 +168,12 @@ func TestGetLeagueSeasons(t *testing.T) {
 		So(len(p), ShouldBeGreaterThan, 2)
 	})
 }
+
+func TestGetMatchHistory(t *testing.T) {
+	Convey("GetMatchHistory should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetMatchHistory(context.Background(), debugPlayerId)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldBeGreaterThan, 1)
+	})
+}

@@ -410,6 +410,90 @@ type LeagueSeason struct {
 	RetMsg string `json:"ret_msg"`
 }
 
+type PlayerMatchHistory struct {
+	ActiveId1 int `json:"ActiveId1"`
+	ActiveId2 int `json:"ActiveId2"`
+	Active_1 string `json:"Active_1"`
+	Active_2 string `json:"Active_2"`
+	Active_3 string `json:"Active_3"`
+	Assists int `json:"Assists"`
+	Ban1 string `json:"Ban1"`
+	Ban1Id int `json:"Ban1Id"`
+
+	Ban10 string `json:"Ban10"`
+	Ban10Id int `json:"Ban10Id"`
+
+	Ban2 string `json:"Ban2"`
+	Ban2Id int `json:"Ban2Id"`
+
+	Ban3 string `json:"Ban3"`
+	Ban3Id int `json:"Ban3Id"`
+
+	Ban4 string `json:"Ban4"`
+	Ban4Id int `json:"Ban4Id"`
+
+	Ban5 string `json:"Ban5"`
+	Ban5Id int `json:"Ban5Id"`
+
+	Ban6 string `json:"Ban6"`
+	Ban6Id int `json:"Ban6Id"`
+
+	Ban7 string `json:"Ban7"`
+	Ban7Id int `json:"Ban7Id"`
+
+	Ban8 string `json:"Ban8"`
+	Ban8Id int `json:"Ban8Id"`
+
+	Ban9 string `json:"Ban9"`
+	Ban9Id int `json:"Ban9Id"`
+
+	Creeps int `json:"Creeps"`
+	Damage int `json:"Damage"`
+	Damage_Bot int `json:"Damage_Bot"`
+	Damage_Mitigated int `json:"Damage_Mitigated"`
+	Damage_Structure int `json:"Damage_Structure"`
+	Damage_Taken int `json:"Damage_Taken"`
+	Deaths int `json:"Deaths"`
+	First_Ban_Side string `json:"First_Ban_Side"`
+	God string `json:"God"`
+	GodId int `json:"GodId"`
+	Gold int `json:"Gold"`
+	Healing int `json:"Healing"`
+	ItemId1 int `json:"ItemId1"`
+	ItemId2 int `json:"ItemId2"`
+	ItemId3 int `json:"ItemId3"`
+	ItemId4 int `json:"ItemId4"`
+	ItemId5 int `json:"ItemId5"`
+	ItemId6 int `json:"ItemId6"`
+
+	Item_1 string `json:"Item_1"`
+	Item_2 string `json:"Item_2"`
+	Item_3 string `json:"Item_3"`
+	Item_4 string `json:"Item_4"`
+	Item_5 string `json:"Item_5"`
+	Item_6 string `json:"Item_6"`
+
+	Killing_Spree int `json:"Killing_Spree"`
+	Kills int `json:"Kills"`
+	Level int `json:"Level"`
+	Match int `json:"Match"`
+	Match_Time string `json:"Match_Time"`
+	Minutes int `json:"Minutes"`
+
+	Multi_kill_Max int `json:"Multi_kill_Max"`
+	Queue string `json:"Queue"`
+	Skin string `json:"Skin"`
+	SkinId int `json:"SkinId"`
+
+	Surrendered string `json:"Surrendered"`
+	Team1Score int `json:"Team1Score"`
+	Team2Score int `json:"Team2Score"`
+	Wards_Placed int `json:"Wards_Placed"`
+	Win_Status string `json:"Win_Status"`
+	PlayerName string `json:"playerName"`
+	RetMsg string `json:"ret_msg"`
+}
+
 // LanguageCode controls what language a response is in
 type LanguageCode int
 

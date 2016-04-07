@@ -141,10 +141,19 @@ func (s *Session) GetLeagueLeaderboard(ctx context.Context, queue Queue, tier Ti
 	return r, nil
 }
 
-// GetLeagueSeasons Provides a list of seasons (including the single active season) for a match queue.
+// GetLeagueSeasons provides a list of seasons (including the single active season) for a match queue.
 func (s *Session) GetLeagueSeasons(ctx context.Context, queue Queue) ([]LeagueSeason, error) {
 	var r []LeagueSeason
 	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getleagueseasons"), queue), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetMatchHistory gets recent matches and high level match statistics for a particular player
+func (s *Session) GetMatchHistory(ctx context.Context, player string) ([]PlayerMatchHistory, error) {
+	var r []PlayerMatchHistory
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("getmatchhistory"), player), &r); err != nil {
 		return nil, err
 	}
 	return r, nil
