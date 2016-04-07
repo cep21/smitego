@@ -140,3 +140,12 @@ func (s *Session) GetLeagueLeaderboard(ctx context.Context, queue Queue, tier Ti
 	}
 	return r, nil
 }
+
+// GetLeagueSeasons Provides a list of seasons (including the single active season) for a match queue.
+func (s *Session) GetLeagueSeasons(ctx context.Context, queue Queue) ([]LeagueSeason, error) {
+	var r []LeagueSeason
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getleagueseasons"), queue), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}

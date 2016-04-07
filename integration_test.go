@@ -159,3 +159,12 @@ func TestGetLeagueLeaderboard(t *testing.T) {
 		So(len(p), ShouldEqual, 500)
 	})
 }
+
+func TestGetLeagueSeasons(t *testing.T) {
+	Convey("GetLeagueSeasons should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetLeagueSeasons(context.Background(), ConquestRanked2)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldBeGreaterThan, 2)
+	})
+}

@@ -403,6 +403,13 @@ type LeaderboardPlayer struct {
 	RetMsg string `json:"ret_msg"`
 }
 
+type LeagueSeason struct {
+	Complete bool `json:"complete"`
+	ID int `json:"id"`
+	Name string `json:"name"`
+	RetMsg string `json:"ret_msg"`
+}
+
 // LanguageCode controls what language a response is in
 type LanguageCode int
 
@@ -465,7 +472,7 @@ const (
 	Joust3v3 = 448
 	// JoustRanked3v3 is ranked joust
 	JoustRanked3v3 = 450
-	// ConquestRanked2 is an unknown type
+	// ConquestRanked2 is an unknown type.  But I think it's the new conquest (??)
 	ConquestRanked2 = 451
 	// ArenaRanked is an old map type, of ranked arena
 	ArenaRanked = 452
