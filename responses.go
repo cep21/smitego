@@ -204,6 +204,14 @@ type RankedInfo struct {
 	RetMsg string `json:"ret_msg"`
 }
 
+type PlayerStatus struct {
+	Match int `json:"Match"`
+	PersonalStatusMessage string `json:"personal_status_message"`
+	RetMsg string `json:"ret_msg"`
+	Status int `json:"Status"`
+	StatusString string `json:"status_string"`
+}
+
 type GetPlayerResponse struct {
 	AvatarURL string `json:"Avatar_URL"`
 	CreatedDatetime string `json:"Created_Datetime"`

@@ -168,10 +168,19 @@ func (s *Session) GetMotd(ctx context.Context) ([]MOTDResponse, error) {
 	return r, nil
 }
 
-// GetPlayer gets recent matches and high level match statistics for a particular player
+// GetPlayer returns league and other high level data for a particular player
 func (s *Session) GetPlayer(ctx context.Context, player string) ([]GetPlayerResponse, error) {
 	var r []GetPlayerResponse
 	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("getplayer"), player), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetPlayerStatus returns player status
+func (s *Session) GetPlayerStatus(ctx context.Context, player string) ([]PlayerStatus, error) {
+	var r []PlayerStatus
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("getplayerstatus"), player), &r); err != nil {
 		return nil, err
 	}
 	return r, nil

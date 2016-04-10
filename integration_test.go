@@ -197,3 +197,13 @@ func TestGetPlayer(t *testing.T) {
 		t.Log(p[0])
 	})
 }
+
+func TestGetPlayerStatus(t *testing.T) {
+	Convey("GetPlayerStatus should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetPlayerStatus(context.Background(), debugPlayerId)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldEqual, 1)
+		t.Log(p[0])
+	})
+}
