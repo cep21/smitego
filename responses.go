@@ -186,6 +186,51 @@ func (s *Player) String() string {
 	return s.Name
 }
 
+type RankedInfo struct {
+	Leaves int `json:"Leaves"`
+	Losses int `json:"Losses"`
+	Name string `json:"Conquest"`
+	Points int `json:"Points"`
+	PrevRank int `json:"PrevRank"`
+	Rank int `json:"Rank"`
+	Rank_Stat_Conquest string `json:"Rank_Stat_Conquest"`
+	Rank_Stat_Duel string `json:"Rank_Stat_Duel"`
+	Rank_Stat_Joust string `json:"Rank_Stat_Joust"`
+	Season int `json:"Season"`
+	Tier int `json:"Tier"`
+	Trend int `json:"Trend"`
+	Wins int `json:"Wins"`
+	PlayerId int `json:"player_id"`
+	RetMsg string `json:"ret_msg"`
+}
+
+type GetPlayerResponse struct {
+	AvatarURL string `json:"Avatar_URL"`
+	CreatedDatetime string `json:"Created_Datetime"`
+	Id int `json:"Id"`
+	LastLoginDatetime string `json:"Last_Login_Datetime"`
+	Leaves int `json:"Leaves"`
+	Level int `json:"Level"`
+	Losses int `json:"Losses"`
+	MasteryLevel int `json:"MasteryLevel"`
+	Name string `json:"Name"`
+	RankStatConquest int `json:"Rank_Stat_Conquest"`
+	RankStatDuel int `json:"Rank_Stat_Duel"`
+	RankStatJoust int `json:"Rank_Stat_Joust"`
+	RankedConquest RankedInfo `json:"RankedConquest"`
+	RankedDuel RankedInfo `json:"RankedDuel"`
+	RankedJoust RankedInfo `json:"RankedJoust"`
+	TeamId int `json:"TeamId"`
+	TeamName string `json:"TeamName"`
+	Tier_Conquest int `json:"Tier_Conquest"`
+	Tier_Duel int `json:"Tier_Duel"`
+	Tier_Joust int `json:"Tier_Joust"`
+	Total_Achievements int `json:"Total_Achievements"`
+	Total_Worshippers int `json:"Total_Worshippers"`
+	Wins int `json:"Wins"`
+	RetMsg int `json:"ret_msg"`
+}
+
 // RecommendedItem is item stats
 type RecommendedItem struct {
 	Category        string `json:"Category"`
@@ -492,6 +537,18 @@ type PlayerMatchHistory struct {
 	Win_Status string `json:"Win_Status"`
 	PlayerName string `json:"playerName"`
 	RetMsg string `json:"ret_msg"`
+}
+
+type MOTDResponse struct {
+	Description string `json:"description"`
+	GameMode string `json:"gameMode"`
+	MaxPlayers string `json:"maxPlayers"`
+	Name string `json:"name"`
+	RetMsg string `json:"ret_msg"`
+	StartDateTime string `json:"startDateTime"`
+	Team1GodsCSV string `json:"team1GodsCSV"`
+	Team2GodsCSV string `json:"team2GodsCSV"`
+	Title string `json:"title"`
 }
 
 // LanguageCode controls what language a response is in

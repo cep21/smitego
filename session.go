@@ -158,3 +158,21 @@ func (s *Session) GetMatchHistory(ctx context.Context, player string) ([]PlayerM
 	}
 	return r, nil
 }
+
+// GetMatchHistory gets recent matches and high level match statistics for a particular player
+func (s *Session) GetMotd(ctx context.Context) ([]MOTDResponse, error) {
+	var r []MOTDResponse
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s", s.urlSession("getmotd")), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetPlayer gets recent matches and high level match statistics for a particular player
+func (s *Session) GetPlayer(ctx context.Context, player string) ([]GetPlayerResponse, error) {
+	var r []GetPlayerResponse
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("getplayer"), player), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}

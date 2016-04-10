@@ -177,3 +177,23 @@ func TestGetMatchHistory(t *testing.T) {
 		So(len(p), ShouldBeGreaterThan, 1)
 	})
 }
+
+func TestGetMotd(t *testing.T) {
+	Convey("GetMotd should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetMotd(context.Background())
+		So(err, ShouldBeNil)
+		So(len(p), ShouldBeGreaterThan, 1)
+		t.Log(p[0])
+	})
+}
+
+func TestGetPlayer(t *testing.T) {
+	Convey("GetPlayer should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetPlayer(context.Background(), debugPlayerId)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldEqual, 1)
+		t.Log(p[0])
+	})
+}
