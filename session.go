@@ -159,7 +159,7 @@ func (s *Session) GetMatchHistory(ctx context.Context, player string) ([]PlayerM
 	return r, nil
 }
 
-// GetMatchHistory gets recent matches and high level match statistics for a particular player
+// GetMotd returns information about the 20 most recent Match-of-the-Days.
 func (s *Session) GetMotd(ctx context.Context) ([]MOTDResponse, error) {
 	var r []MOTDResponse
 	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s", s.urlSession("getmotd")), &r); err != nil {
@@ -233,9 +233,9 @@ func (s *Session) SearchTeams(ctx context.Context, searchTeam string) ([]TeamSea
 
 // GetPlayerAchievements returns select achievement totals
 // (Double kills, Tower Kills, First Bloods, etc) for the specified playerId.
-func (s *Session) GetPlayerAchievements(ctx context.Context, playerId int) (PlayerAchievements, error) {
+func (s *Session) GetPlayerAchievements(ctx context.Context, playerID int) (PlayerAchievements, error) {
 	var r PlayerAchievements
-	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getplayerachievements"), playerId), &r); err != nil {
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getplayerachievements"), playerID), &r); err != nil {
 		return r, err
 	}
 	return r, nil
