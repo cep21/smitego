@@ -16,11 +16,9 @@ import (
 
 func main() {
   // First make a client to describe how you want to connect.  Each client
-  // returns a session
-  // and primary function calls are done on the session.  Concurrent sessions
-  // are limited
-  // by HiRez
-  client := Client{
+  // returns a session and primary function calls are done on the
+  // session.  Concurrent sessions are limited by HiRez
+  client := smitego.Client{
     DevID:   123,
     AuthKey: "AuthKey123",
   }
@@ -47,6 +45,7 @@ put it at the root of your project.  That file should have your
 devId and authKey.  The file should be inside .gitignore and not checked into
 git.  Then run with the tag integration.
 
+File info.json
 ```
 {
   "devId": 123,
@@ -54,6 +53,6 @@ git.  Then run with the tag integration.
 }
 ```
 
-```
-  go test -v --tags=integration .
+```bash
+go test -v --tags=integration .
 ```
