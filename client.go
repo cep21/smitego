@@ -10,6 +10,7 @@ import (
 	"io"
 	"net/http"
 	"time"
+	"runtime"
 )
 
 // DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
@@ -17,6 +18,8 @@ const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 
 // DefaultXboxURL is used for smite's XBox API
 const DefaultXboxURL = "http://api.xbox.smitegame.com/smiteapi.svc"
+
+const Version = "0.1"
 
 // Client can create smite session objects and interact with the smite API
 type Client struct {
@@ -79,6 +82,7 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 	if err != nil {
 		return err
 	}
+	req.Header.Set("User-Agent", fmt.Sprintf("github.com/cep21/smitego/%s (gover %s)", Version, runtime.Version()))
 	resp, err := withCancel(ctx, &c.HTTPClient, req)
 	if err != nil {
 		return err
