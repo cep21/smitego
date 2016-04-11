@@ -9,8 +9,8 @@ import (
 	"golang.org/x/net/context"
 	"io"
 	"net/http"
-	"time"
 	"runtime"
+	"time"
 )
 
 // DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
@@ -19,6 +19,7 @@ const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 // DefaultXboxURL is used for smite's XBox API
 const DefaultXboxURL = "http://api.xbox.smitegame.com/smiteapi.svc"
 
+// Version is the current library's version: sent with User-Agent
 const Version = "0.1"
 
 // Client can create smite session objects and interact with the smite API
