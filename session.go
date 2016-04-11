@@ -221,3 +221,22 @@ func (s *Session) GetTopMatches(ctx context.Context) ([]TopWatch, error) {
 	}
 	return r, nil
 }
+
+// SearchTeams returns high level information for Team names containing the “searchTeam” string.
+func (s *Session) SearchTeams(ctx context.Context, searchTeam string) ([]TeamSearchRes, error) {
+	var r []TeamSearchRes
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s", s.urlSession("searchteams"), searchTeam), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetPlayerAchievements returns select achievement totals
+// (Double kills, Tower Kills, First Bloods, etc) for the specified playerId.
+func (s *Session) GetPlayerAchievements(ctx context.Context, playerId int) (PlayerAchievements, error) {
+	var r PlayerAchievements
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getplayerachievements"), playerId), &r); err != nil {
+		return r, err
+	}
+	return r, nil
+}

@@ -622,6 +622,43 @@ type TopWatch struct {
 	RetMsg string `json:"ret_msg"`
 }
 
+type TeamSearchRes struct {
+	Founder string `json:"Founder"`
+	Name string `json:"Name"`
+	Players int `json:"Players"`
+	Tag string `json:"Tag"`
+	TeamId int `json:"TeamId"`
+	RetMsg string `json:"ret_msg"`
+}
+
+type PlayerAchievements struct {
+	AssistedKills int `json:"AssistedKills"`
+	CampsCleared int `json:"CampsCleared"`
+	DivineSpree int `json:"DivineSpree"`
+	DoubleKills int `json:"DoubleKills"`
+	FireGiantKills int `json:"FireGiantKills"`
+	FirstBloods int `json:"FirstBloods"`
+	GodLikeSpree int `json:"GodLikeSpree"`
+	GoldFuryKills int `json:"GoldFuryKills"`
+	Id int `json:"Id"`
+	ImmortalSpree int `json:"ImmortalSpree"`
+	KillingSpree int `json:"KillingSpree"`
+	MinionKills int `json:"MinionKills"`
+	Name string `json:"Name"`
+	PentaKills int `json:"PentaKills"`
+	PhoenixKills int `json:"PhoenixKills"`
+	PlayerKills int `json:"PlayerKills"`
+	QuadraKills int `json:"QuadraKills"`
+	RampageSpree int `json:"RampageSpree"`
+	ShutdownSpree int `json:"ShutdownSpree"`
+	SiegeJuggernautKills int `json:"SiegeJuggernautKills"`
+	TowerKills int `json:"TowerKills"`
+	TripleKills int `json:"TripleKills"`
+	UnstoppableSpree int `json:"UnstoppableSpree"`
+	WildJuggernautKills int `json:"WildJuggernautKills"`
+	RetMsg string `json:"ret_msg"`
+}
+
 // LanguageCode controls what language a response is in
 type LanguageCode int
 
