@@ -39,3 +39,21 @@ func main() {
   fmt.Printf("Got %d gods\n", len(gods))
 }
 ```
+
+## Integration tests
+
+You can test all the library functions by creating a file named info.json and
+put it at the root of your project.  That file should have your
+devId and authKey.  The file should be inside .gitignore and not checked into
+git.  Then run with the tag integration.
+
+```
+{
+  "devId": 123,
+  "authKey": "abcd"
+}
+```
+
+```
+  go test -v --tags=integration .
+```
