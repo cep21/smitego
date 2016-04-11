@@ -15,6 +15,9 @@ import (
 // DefaultBaseURL is where smite expects API calls.  Why the frick is this HTTP and not HTTPS.  (?????)
 const DefaultBaseURL = "http://api.smitegame.com/smiteapi.svc"
 
+// DefaultXboxURL is used for smite's XBox API
+const DefaultXboxURL = "http://api.xbox.smitegame.com/smiteapi.svc"
+
 // Client can create smite session objects and interact with the smite API
 type Client struct {
 	DevID      int64
@@ -32,6 +35,16 @@ type Log func(...interface{})
 type ErrNotExpectedJSON struct {
 	OriginalBody string
 	Err          error
+}
+
+// ErrBadStatusCode is returned when the API returns a non 200 error code
+type ErrBadStatusCode struct {
+	OriginalBody string
+	Code         int
+}
+
+func (e *ErrBadStatusCode) Error() string {
+	return fmt.Sprintf("Invalid status code: %d", e.Code)
 }
 
 func (c *Client) verboseLog(v ...interface{}) {
@@ -75,6 +88,13 @@ func (c *Client) doReqURL(ctx context.Context, u string, jsonInto interface{}) e
 		return err
 	}
 	debug := b.String()
+	if resp.StatusCode != http.StatusOK {
+		c.verboseLog("Invalid status code", resp.StatusCode)
+		return &ErrBadStatusCode{
+			OriginalBody: debug,
+			Code:         resp.StatusCode,
+		}
+	}
 	c.verboseLog("Fetch result", debug)
 	if err := json.NewDecoder(&b).Decode(jsonInto); err != nil {
 		return &ErrNotExpectedJSON{
