@@ -185,3 +185,39 @@ func (s *Session) GetPlayerStatus(ctx context.Context, player string) ([]PlayerS
 	}
 	return r, nil
 }
+
+// GetQueueStats returns match summary statistics for a (player, queue) combination grouped by gods played.
+func (s *Session) GetQueueStats(ctx context.Context, player string, queue Queue) ([]QueueStat, error) {
+	var r []QueueStat
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%s/%d", s.urlSession("getqueuestats"), player, queue), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetTeamDetails lists the number of players and other high level details for a particular clan.
+func (s *Session) GetTeamDetails(ctx context.Context, teamid int) ([]TeamDetails, error) {
+	var r []TeamDetails
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getteamdetails"), teamid), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetTeamPlayers lists the players for a particular clan
+func (s *Session) GetTeamPlayers(ctx context.Context, clanid int) ([]TeamPlayer, error) {
+	var r []TeamPlayer
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s/%d", s.urlSession("getteamplayers"), clanid), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+// GetTopMatches Lists the 50 most watched / most recent recorded matches.
+func (s *Session) GetTopMatches(ctx context.Context) ([]TopWatch, error) {
+	var r []TopWatch
+	if err := s.parent.doReqURL(ctx, fmt.Sprintf("%s", s.urlSession("gettopmatches")), &r); err != nil {
+		return nil, err
+	}
+	return r, nil
+}

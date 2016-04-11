@@ -559,6 +559,69 @@ type MOTDResponse struct {
 	Title string `json:"title"`
 }
 
+type QueueStat struct {
+	Assists int `json:"Assists"`
+	Deaths int `json:"Deaths"`
+	God string `json:"God"`
+	GodId int `json:"GodId"`
+	Gold int `json:"Gold"`
+	Kills int `json:"Kills"`
+	LastPlayed string `json:"LastPlayed"`
+	Losses int `json:"Losses"`
+	Matches int `json:"Matches"`
+	Minutes int `json:"Minutes"`
+	Queue string `json:"Queue"`
+	Wins int `json:"Wins"`
+	player_id string `json:"player_id"`
+	RetMsg string `json:"ret_msg"`
+}
+
+type TeamDetails struct {
+	Founder string `json:"Founder"`
+	FounderId string `json:"FounderId"`
+	Losses int `json:"Losses"`
+	Name string `json:"Name"`
+	Players int `json:"Players"`
+	Rating int `json:"Rating"`
+	Tag string `json:"Tag"`
+	TeamId int `json:"TeamId"`
+	Wins int `json:"Wins"`
+	RetMsg string `json:"ret_msg"`
+}
+
+type TeamPlayer struct {
+	AccountLevel int `json:"AccountLevel"`
+	JoinedDatetime string `json:"JoinedDatetime"`
+	LastLoginDatetime string `json:"LastLoginDatetime"`
+	Name string `json:"Name"`
+	RetMsg string `json:"ret_msg"`
+}
+
+type TopWatch struct {
+	Ban1 string `json:"Ban1"`
+	Ban1Id int `json:"Ban1Id"`
+	Ban2 string `json:"Ban2"`
+	Ban2Id int `json:"Ban2Id"`
+	Entry_Datetime string `json:"Entry_Datetime"`
+	LiveSpectators int `json:"LiveSpectators"`
+	Match int `json:"Match"`
+	Match_Time int `json:"Match_Time"`
+	OfflineSpectators int `json:"OfflineSpectators"`
+	Queue string `json:"Queue"`
+	RecordingFinished string `json:"RecordingFinished"`
+	RecordingStarted string `json:"RecordingStarted"`
+	Team1_AvgLevel int `json:"Team1_AvgLevel"`
+	Team1_Gold int `json:"Team1_Gold"`
+	Team1_Kills int `json:"Team1_Kills"`
+	Team1_Score int `json:"Team1_Score"`
+	Team2_AvgLevel int `json:"Team2_AvgLevel"`
+	Team2_Gold int `json:"Team2_Gold"`
+	Team2_Kills int `json:"Team2_Kills"`
+	Team2_Score int `json:"Team2_Score"`
+	WinningTeam int `json:"WinningTeam"`
+	RetMsg string `json:"ret_msg"`
+}
+
 // LanguageCode controls what language a response is in
 type LanguageCode int
 

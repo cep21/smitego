@@ -37,6 +37,7 @@ var session *Session
 
 const debugMatchId = 237403351
 const debugPlayerId = "cep21"
+const debugTeamId = 497261
 const debugGodId = 1737
 
 func init() {
@@ -205,5 +206,43 @@ func TestGetPlayerStatus(t *testing.T) {
 		So(err, ShouldBeNil)
 		So(len(p), ShouldEqual, 1)
 		t.Log(p[0])
+	})
+}
+
+func TestGetQueueStats(t *testing.T) {
+	Convey("GetQueueStats should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetQueueStats(context.Background(), debugPlayerId, JoustRanked3v3)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldBeGreaterThanOrEqualTo, 0)
+	})
+}
+
+func TestGetTeamDetails(t *testing.T) {
+	Convey("GetTeamDetails should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetTeamDetails(context.Background(), debugTeamId)
+		So(err, ShouldBeNil)
+		So(len(p), ShouldEqual, 1)
+	})
+}
+
+func TestGetTeamPlayers(t *testing.T) {
+	Convey("GetTeamPlayers should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetTeamPlayers(context.Background(), debugTeamId)
+		So(err, ShouldBeNil)
+		t.Log(p)
+		So(len(p), ShouldBeGreaterThan, 1)
+	})
+}
+
+func TestGetTopMatches(t *testing.T) {
+	Convey("GetTopMatches should work", t, func() {
+		client.VerboseLog = t.Log
+		p, err := session.GetTopMatches(context.Background())
+		So(err, ShouldBeNil)
+		t.Log(p)
+		So(len(p), ShouldBeGreaterThan, 1)
 	})
 }
