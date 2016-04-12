@@ -2,12 +2,12 @@ package smitego
 
 import (
 	"fmt"
-	"golang.org/x/net/context"
-	"testing"
 	. "github.com/smartystreets/goconvey/convey"
+	"golang.org/x/net/context"
+	"io/ioutil"
 	"net/http"
 	"strings"
-	"io/ioutil"
+	"testing"
 )
 
 type errorRT struct {
@@ -54,8 +54,7 @@ func ExampleSession() {
 
 func TestClient(t *testing.T) {
 	Convey("With a client", t, func() {
-		c := Client {
-		}
+		c := Client{}
 		ctx := context.Background()
 		Convey("that errors http connections", func() {
 			rt := &errorRT{}
@@ -70,7 +69,7 @@ func TestClient(t *testing.T) {
 			sr := &staticResp{
 				Resp: &http.Response{
 					StatusCode: http.StatusNotFound,
-					Body: ioutil.NopCloser(strings.NewReader("")),
+					Body:       ioutil.NopCloser(strings.NewReader("")),
 				},
 			}
 			c.HTTPClient.Transport = sr
