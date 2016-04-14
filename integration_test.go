@@ -154,6 +154,30 @@ func TestGetMatchidsByQueue(t *testing.T) {
 	})
 }
 
+func TestGetDaysMatchIds(t *testing.T) {
+	Convey("GetMatchidsByQueue should work", t, func() {
+		client.VerboseLog = t.Log
+		dets, err := session.GetMatchidsByQueue(context.Background(), Joust3v3, 2016, 4, 5, 1)
+		So(err, ShouldBeNil)
+		So(len(dets), ShouldEqual, 1268)
+	})
+}
+
+func TestGetTodaysMatchIds(t *testing.T) {
+	Convey("Test fetching today's matches should work", t, func() {
+		now := time.Now().UTC()
+		y, m, d := now.Date()
+		for h := 0; h < 24; h++ {
+			dets, err := session.GetMatchidsByQueue(context.Background(), Joust3v3, y, int(m), d, h)
+			So(err, ShouldBeNil)
+			t.Logf("Hour = %d, len(items) = %d", h, len(dets))
+			if len(dets) > 0 {
+				t.Logf("A single match: %s", dets[0])
+			}
+		}
+	})
+}
+
 func TestGetLeagueLeaderboard(t *testing.T) {
 	Convey("GetLeagueLeaderboard should work", t, func() {
 		client.VerboseLog = t.Log
