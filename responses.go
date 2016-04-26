@@ -399,7 +399,7 @@ type MatchPlayerInfo struct {
 	Skin                 string `json:"Skin"`
 	SkinID               int    `json:"SkinId"`
 	StructureDamage      int    `json:"Structure_Damage"`
-	Surrendered          string `json:"Surrendered"`
+	Surrendered          int `json:"Surrendered"`
 	Team1Score           int    `json:"Team1Score"`
 	Team2Score           int    `json:"Team2Score"`
 	TeamID               int    `json:"TeamId"`
@@ -543,7 +543,7 @@ type PlayerMatchHistory struct {
 	Skin         string `json:"Skin"`
 	SkinID       int    `json:"SkinId"`
 
-	Surrendered string `json:"Surrendered"`
+	Surrendered int `json:"Surrendered"`
 	Team1Score  int    `json:"Team1Score"`
 	Team2Score  int    `json:"Team2Score"`
 	WardsPlaced int    `json:"Wards_Placed"`
